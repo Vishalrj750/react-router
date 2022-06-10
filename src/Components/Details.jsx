@@ -5,12 +5,42 @@ import styledComponents from "styled-components";
 
 const DetailsWrapper = styledComponents.div`
 *{
-    background-color: green;
+    margin: auto;
 }
 .main{
-    text-align: center;
-    font-size: 45px;
-    margin-top: 120px;
+    display: flex;
+    width: 90vw;
+    height: 250px;
+    justify-content: space-around;
+    align-items: center;
+    background-color: aliceblue;
+    box-shadow: 5px 5px 5px #cecece;
+    margin-top: 25px;
+}
+.img-div{
+    width: 40%;
+    height: 100%;
+}
+.img-div img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.details-div{
+
+}
+button{
+    background-color: blue;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    margin: 20px;
+    color: white;
+}
+button:hover{
+    background-color: white;
+    color: blue;
 }
 `
 
@@ -40,10 +70,6 @@ function Details() {
                 temp.push(state.images[key]);
             }
             setImages(temp);
-            // setInterval(() => {
-            //     count.current += 1;
-            //     console.log(count);
-            // }, 1000);
         }
     },[state])
 
@@ -56,7 +82,6 @@ function Details() {
                 else{
                     count.current += 1;
                 }
-                console.log(count.current);
                 setImage(images[count.current]);
                 
             },3000)
@@ -68,7 +93,17 @@ function Details() {
     return (!!state.title) ? (
         <DetailsWrapper>
             <div className="main">
-                <img src={image} alt="t-shirt" />
+                <div className="img-div">
+                    <img src={image} alt="t-shirt" />
+                </div>
+                <div className="details-div">
+                    <h2>{state.title + " " + state.color}</h2>
+                    <h3>{"Brand - " + state.brand}</h3>
+                    <h3>{"₹ " + state.price}</h3>
+                    <p>{"Rating " + state.rating + " out of 5"}</p>
+                    <button>Add to cart</button>
+                    <button>Buy Now</button>
+                </div>
             </div>
         </DetailsWrapper>
     ) :  (null)
